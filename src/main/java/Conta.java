@@ -45,12 +45,13 @@ public class Conta {
      */
     @When("^for solicitado um saque no valor de (\\d+) reais$")
     public void for_solicitado_um_saque_no_valor_de_reais(Integer arg1) {
-        // Verificar se é possível realizar o saque
-        if (arg1 > 0 && saldo + arg1 >= 0) {
-            saldo -= arg1; // Realizar o saque
-        } else {
-            saqueSuficiente = false;
+
+        if (arg1 < 0 || this.saldo + arg1 < 0) {
+            this.saqueSuficiente = false;
+            return;
         }
+
+        this.saqueSuficiente = true;
     }
 
     /**
@@ -60,11 +61,13 @@ public class Conta {
      */
     @Then("^deve efetuar o saque e atualizar o saldo da conta para -(\\d+) reais$")
     public void deve_efetuar_o_saque_e_atualizar_o_saldo_da_conta_para_reais(Integer arg1) {
-        if (saldo == -arg1) {
-            System.out.println("Saque realizado com sucesso. Novo saldo: " + saldo);
-        } else {
+
+        if (saldo != -arg1) {
             System.out.println("Erro ao efetuar o saque.");
+            return;
         }
+
+        System.out.println("Saque realizado com sucesso. Novo saldo: " + saldo);
     }
 
     /**
@@ -73,11 +76,13 @@ public class Conta {
      */
     @Then("Não deve efetuar o saque e deve retornar a mensagem Saldo Insuficiente.")
     public void nao_deve_efetuar_o_saque_e_deve_retornar_a_mensagem_Saldo_Insuficiente() {
+        
         if (!saqueSuficiente) {
             System.out.println("Saque não realizado. Saldo insuficiente.");
-        } else {
-            System.out.println("Erro ao verificar o saldo insuficiente.");
+            return;
         }
+
+        System.out.println("Erro ao verificar o saldo insuficiente.");
     }
 
     /**
