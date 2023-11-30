@@ -64,13 +64,13 @@ code CucumberContaBancaria
 
 No caso, no Visual Studio Code, podemos rodar os testes ao acessármos a classe `src/test/java/Runner.java` e clicármos sobre o botão de executar os testes:
 
-![Captura de tela do cursor do sistema sobre o botão de execução de testes](image.png)
+![Captura de tela do cursor do sistema sobre o botão de execução de testes](images/image.png)
 
 ### 4. Pós-execução dos testes
 
 Após executar os testes será impresso no console os resultados dos testes dessa forma:
 
-![Resultado dos testes realizados](image-1.png)
+![Resultado dos testes realizados](images/image-1.png)
 
 ## Testes realizados
 
