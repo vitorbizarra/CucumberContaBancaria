@@ -19,7 +19,7 @@ public class Conta {
     private boolean saqueSuficiente;
 
     /**
-     * Inicializa o
+     * Inicializa um cliente especial com o saldo informado
      * 
      * @param arg1 - Valor atual do saldo do cliente
      */
@@ -28,6 +28,11 @@ public class Conta {
         criarClienteEspecialComSaldoNegativo(arg1);
     }
 
+    /**
+     * Inicializa um cliente comum com o saldo informado
+     * 
+     * @param arg1 - Valor atual do saldo do cliente
+     */
     @Given("^Um cliente comum com saldo atual de -(\\d+) reais$")
     public void um_cliente_comum_com_saldo_atual_de_reais(int arg1) {
         criarClienteComumComSaldoNegativo(arg1);
@@ -54,7 +59,7 @@ public class Conta {
      * @param arg1 Novo valor do saldo da conta após o saque (negativo).
      */
     @Then("^deve efetuar o saque e atualizar o saldo da conta para -(\\d+) reais$")
-    public void deve_efetuar_o_saque_e_atualizar_o_saldo_da_conta_para_reais(int arg1) {
+    public void deve_efetuar_o_saque_e_atualizar_o_saldo_da_conta_para_reais(Integer arg1) {
         if (saldo == -arg1) {
             System.out.println("Saque realizado com sucesso. Novo saldo: " + saldo);
         } else {
@@ -67,7 +72,7 @@ public class Conta {
      *
      */
     @Then("Não deve efetuar o saque e deve retornar a mensagem Saldo Insuficiente.")
-    public void nao_deve_efetuar_o_saque_e_deve_retornar_a_mensagem_Saldo_Insuficiente() throws Throwable {
+    public void nao_deve_efetuar_o_saque_e_deve_retornar_a_mensagem_Saldo_Insuficiente() {
         if (!saqueSuficiente) {
             System.out.println("Saque não realizado. Saldo insuficiente.");
         } else {
@@ -80,7 +85,7 @@ public class Conta {
      *
      * @param arg1 Valor inicial do saldo do cliente especial (negativo).
      */
-    private void criarClienteEspecialComSaldoNegativo(int arg1) {
+    private void criarClienteEspecialComSaldoNegativo(Integer arg1) {
         saldo = -arg1;
     }
 
@@ -89,7 +94,7 @@ public class Conta {
      *
      * @param arg1 Valor inicial do saldo do cliente comum (negativo).
      */
-    private void criarClienteComumComSaldoNegativo(int arg1) {
+    private void criarClienteComumComSaldoNegativo(Integer arg1) {
         saldo = -arg1;
     }
 }
